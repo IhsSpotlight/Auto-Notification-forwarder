@@ -1,4 +1,4 @@
-package com.example.notifforwarder
+package com.example.notificationaccess
 
 import android.content.Context
 import android.service.notification.NotificationListenerService
@@ -19,7 +19,15 @@ class MyNotificationService : NotificationListenerService() {
         if (!serverUrl.isNullOrEmpty()) {
             NotificationSender.sendNotificationToServer(serverUrl, title, text, packageName)
         } else {
-            println("⚠️ Server URL not set")
+            println("⚠️ Server URL not shttp://127.0.0.1:5000et")
+        }
+    }
+    override fun onListenerConnected() {
+        super.onListenerConnected()
+        val sharedPref = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
+        val serverUrl = sharedPref.getString("server_url", null)
+        if (!serverUrl.isNullOrEmpty()) {
+            NotificationSender.startHeartbeat(serverUrl)
         }
     }
 }

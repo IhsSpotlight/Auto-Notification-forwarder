@@ -9,6 +9,8 @@ import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
+import androidx.core.content.edit
 
 class MainActivity : AppCompatActivity() {
     private lateinit var serverUrlInput: EditText
@@ -20,17 +22,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         serverUrlInput = findViewById(R.id.etServerUrl)
+        saveButton = findViewById(R.id.saveButton)
+
 
         // You will need to add this button to your activity_main.xml layout
         permissionButton = findViewById(R.id.permissionButton)
 
         val sharedPref = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
         val savedUrl = sharedPref.getString("server_url", "")
-        serverUrlInput.setText(savedUrl)
+        serverUrlInput.setText(savedUrl) //commented
 
         saveButton.setOnClickListener {
             val url = serverUrlInput.text.toString().trim()
-            sharedPref.edit().putString("server_url", url).apply()
+            sharedPref.edit { putString("server_url", url) }
         }
 
         permissionButton.setOnClickListener {
@@ -39,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onResume() {
         super.onResume()
         // When the user returns to the app, check if the permission is now enabled
