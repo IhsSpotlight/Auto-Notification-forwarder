@@ -1,58 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="20dp"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
 
     <TextView
-        android:text="Notification Forwarder"
-        android:textSize="20sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Server URL:"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/etServerUrl"
-        android:hint="https://example.com/api/notify"
-        android:inputType="textUri"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-       <Button
-        android:id="@+id/permissionButton"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Grant Notification Access" />
+        android:hint="e.g., http://yourserver:5000/api/notifications"
+        android:inputType="textUri"
+        android:autofillHints="url" />
 
-        <Button
+    <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="saveButton"/>
+        android:text="Save URL"/>
 
-    <Switch
-        android:id="@+id/switchForwarding"
-        android:text="Enable Forwarding"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"/>
 
     <Button
-        android:id="@+id/btnHideApp"
-        android:text="Hide App Icon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/btnUnhideApp"
-        android:text="Unhide App Icon"
+        android:id="@+id/permissionButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:text="Grant Notification Access"
+        android:layout_marginBottom="8dp"/>
+
+    <Button
+        android:id="@+id/toggleSendingButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Sending Data"
+        android:layout_marginBottom="8dp"/>
 
     <TextView
-        android:id="@+id/tvStatus"
-        android:text="Status: Idle"
-        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connection Status:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvConnectionStatus"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Status: Waiting for user action..."
+        android:padding="4dp"
+        android:textColor="@android:color/black"/>
+
 </LinearLayout>
